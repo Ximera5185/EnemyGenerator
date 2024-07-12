@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Move : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-       // rigidbody.AddForce(5*Time.deltaTime,0,0,ForceMode.Acceleration);
-        rigidbody.MovePosition(transform.position+Vector3.right*0.1f);
+        _rigidbody.MovePosition(transform.position+Vector3.right*5);
     }
 }
