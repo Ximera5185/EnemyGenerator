@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1960902042130268576}
   - component: {fileID: 5228096247835551390}
   - component: {fileID: 6369155048050203688}
+  - component: {fileID: 3275072074778470589}
   m_Layer: 0
   m_Name: Anemy
   m_TagString: Untagged
@@ -129,7 +130,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -146,3 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f858aeaded342d848ab6bcae5b1d2662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3275072074778470589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332073624764412510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c96c57270500ae4f98fcf326e1184f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 8110282158717789619, guid: 3f7ab6aae61ac3b4483e50017d637d2e, type: 3}

@@ -8,7 +8,7 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] private Anemy _anemy;
 
-    private int _amountToPool = 10;
+    private int _amountToPool = 40;
 
     private void Start()
     {
