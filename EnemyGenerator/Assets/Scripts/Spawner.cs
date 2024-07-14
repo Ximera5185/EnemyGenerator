@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
 
     public Vector3 GetDirectionVector() 
     {
-        float vectorX = Random.Range(-0.1f, 0.1f);
+        float vectorX = Random.Range(-1f, 1f);
         float vectorY = 0;
         float vectorZ = 0;
 

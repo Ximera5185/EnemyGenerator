@@ -10,21 +10,25 @@ public class Move : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-    private float _speed = 1f;
+    private float _speed = 10f;
 
-    private Vector3 _position ;
-    private Quaternion _rotation ;
+    private Vector3 _position;
+    private Quaternion _rotation;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _position = _spawner.GetDirectionVector();
         _rotation = _spawner.GetQuaternion();
+        transform.rotation = _rotation;
     }
 
     private void FixedUpdate()
     {
-        _rigidbody.MovePosition(transform.position += _position * _speed);
-        
-        _rigidbody.rotation = _rotation;
+        _rigidbody.MovePosition(transform.position + _position * Time.deltaTime * _speed);
+
+        // _rigidbody.rotation = _rotation;
+        // transform.Translate(_position);
+
     }
 }
