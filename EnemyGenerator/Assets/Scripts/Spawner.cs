@@ -1,16 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private ObjectPool _anemyPool;
+    [SerializeField] private List<Transform> _spawnPoints;
     private WaitForSeconds _waitForSeconds;
 
     private float _timeSpawn = 2f;
+
     private void Awake()
     {
         _waitForSeconds = new WaitForSeconds(_timeSpawn);
@@ -21,13 +21,17 @@ public class Spawner : MonoBehaviour
         StartCoroutine(Counting());
     }
 
-    public void SpawnCubes()
+    private void SpawnCubes()
     {
+        int index = Random.Range(0, _spawnPoints.Count);
+
         if (_anemyPool.TryGetObject(out Anemy anemy))
         {
-            anemy.transform.position = transform.position;
+            anemy.transform.position = _spawnPoints [index].position;
 
             anemy.gameObject.SetActive(true);
+
+            anemy.Initialise(GetRotation(),GetDirectionVector());
         }
         else
         {
@@ -35,17 +39,14 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public Vector3 GetDirectionVector() 
+    public Vector3 GetDirectionVector()
     {
-        float vectorX = Random.Range(-1f, 1f);
-        float vectorY = 0;
-        float vectorZ = 0;
-
-        return new Vector3(vectorX, vectorY,vectorZ);
+        return Vector3.right;
     }
-    public Quaternion  GetQuaternion() 
+
+    public float  GetRotation() 
     {
-        return Quaternion.Euler(0, Random.Range(-180f, 180f), 0);
+        return  Random.Range(-180, 180);
     }
 
     private IEnumerator Counting()

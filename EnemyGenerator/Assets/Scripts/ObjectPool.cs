@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] private Anemy _anemy;
 
-    private int _amountToPool = 40;
+    private int _amountToPool = 5;
 
     private void Start()
     {

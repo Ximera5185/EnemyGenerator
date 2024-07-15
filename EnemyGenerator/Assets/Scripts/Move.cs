@@ -1,34 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] Spawner _spawner;
+    private float _rotationY;
+    private Vector3 _direction;
+    private float _speed = 1f;
 
-    private Rigidbody _rigidbody;
-
-    private float _speed = 10f;
-
-    private Vector3 _position;
-    private Quaternion _rotation;
-
-    private void Awake()
+    private void Update()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _position = _spawner.GetDirectionVector();
-        _rotation = _spawner.GetQuaternion();
-        transform.rotation = _rotation;
+        transform.Translate(_direction * _speed * Time.deltaTime);
     }
 
-    private void FixedUpdate()
+    public void Initialise(float rotation,Vector3 direction) 
     {
-        _rigidbody.MovePosition(transform.position + _position * Time.deltaTime * _speed);
+        _rotationY = rotation;
 
-        // _rigidbody.rotation = _rotation;
-        // transform.Translate(_position);
+        _direction = direction;
 
+        transform.rotation = Quaternion.Euler(0,rotation,0);
+
+       // transform.Rotate(0, _rotationY, 0);
     }
 }

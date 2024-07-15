@@ -1,18 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Anemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private WaitForSeconds _waitForSeconds;
+
+    private float _lifetime = 5f;
+
+    [SerializeField] private Move _move;
+    
+    private void Awake()
     {
-        
+        _waitForSeconds = new WaitForSeconds(_lifetime);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        StartCoroutine(Counting());
+    }
+
+    private IEnumerator Counting()
+    {
+        yield return _waitForSeconds;
+
+        gameObject.SetActive(false);
+    }
+
+    public void Initialise(float rotation,Vector3 direction) 
+    {
+        _move.Initialise(rotation,direction);
     }
 }
