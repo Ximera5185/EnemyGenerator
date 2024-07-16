@@ -3,46 +3,45 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private List<Anemy> _poolAnemys;
-
-    [SerializeField] private Anemy _anemy;
+    [SerializeField] private List<Enemy> _poolEnemys;
+    [SerializeField] private Enemy _enemy;
 
     private int _amountToPool = 5;
 
-    private void Start()
+    private void Awake()
     {
-        _poolAnemys = new List<Anemy>();
+        _poolEnemys = new List<Enemy>();
 
-        CreatePoolCubes();
+        CreateEnemies();
     }
 
-    public bool TryGetObject(out Anemy anemy)
+    public bool TryGetObject(out Enemy enemy)
     {
-        for (int i = 0; i < _poolAnemys.Count; i++)
+        for (int i = 0; i < _poolEnemys.Count; i++)
         {
-            if (_poolAnemys [i].gameObject.activeSelf == false)
+            if (_poolEnemys [i].gameObject.activeSelf == false)
             {
-                anemy = _poolAnemys [i];
+                enemy = _poolEnemys [i];
 
                 return true;
             }
         }
 
-        anemy = null;
+        enemy = null;
 
         return false;
     }
 
     public void IncreasePool()
     {
-        Anemy anemy = Instantiate(_anemy);
+        Enemy enemy = Instantiate(_enemy);
 
-        anemy.gameObject.SetActive(false);
+        enemy.gameObject.SetActive(false);
 
-        _poolAnemys.Add(anemy);
+        _poolEnemys.Add(enemy);
     }
 
-    private void CreatePoolCubes()
+    private void CreateEnemies()
     {
         for (int i = 0; i < _amountToPool; i++)
         {

@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private ObjectPool _anemyPool;
     [SerializeField] private List<Transform> _spawnPoints;
+
     private WaitForSeconds _waitForSeconds;
 
     private float _timeSpawn = 2f;
@@ -21,17 +22,30 @@ public class Spawner : MonoBehaviour
         StartCoroutine(Counting());
     }
 
-    private void SpawnCubes()
+    public Vector3 GetDirectionVector()
+    {
+        return Vector3.right;
+    }
+
+    public float GetRotation()
+    {
+        float minValueRotation = -180f;
+        float maxValueRotation = 180f;
+
+        return Random.Range(minValueRotation, maxValueRotation);
+    }
+
+    private void SpawnEnemies()
     {
         int index = Random.Range(0, _spawnPoints.Count);
 
-        if (_anemyPool.TryGetObject(out Anemy anemy))
+        if (_anemyPool.TryGetObject(out Enemy enemy))
         {
-            anemy.transform.position = _spawnPoints [index].position;
+            enemy.transform.position = _spawnPoints [index].position;
 
-            anemy.gameObject.SetActive(true);
+            enemy.gameObject.SetActive(true);
 
-            anemy.Initialise(GetRotation(),GetDirectionVector());
+            enemy.Initialise(GetRotation(), GetDirectionVector());
         }
         else
         {
@@ -39,21 +53,11 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public Vector3 GetDirectionVector()
-    {
-        return Vector3.right;
-    }
-
-    public float  GetRotation() 
-    {
-        return  Random.Range(-180, 180);
-    }
-
     private IEnumerator Counting()
     {
         while (enabled)
         {
-            SpawnCubes();
+            SpawnEnemies();
 
             yield return _waitForSeconds;
         }
